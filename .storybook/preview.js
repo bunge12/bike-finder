@@ -9,4 +9,8 @@ export const parameters = {
   viewport: {
     defaultViewport: "mobile2",
   },
+  layout: "fullscreen",
+  backgrounds: {
+    default: "dark",
+  },
 };
