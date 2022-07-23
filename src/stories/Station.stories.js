@@ -38,5 +38,6 @@ const sampleStation = {
 };
 
 export const Primary = Template.bind({});
-
 Primary.args = { station: sampleStation };
+export const Loading = Template.bind({});
+Loading.args = {};

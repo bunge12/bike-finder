@@ -1,4 +1,12 @@
-import { Badge, Card, Group, Text, Space, ActionIcon } from "@mantine/core";
+import {
+  Badge,
+  Card,
+  Group,
+  Text,
+  Space,
+  ActionIcon,
+  Skeleton,
+} from "@mantine/core";
 import React from "react";
 import PedalBikeIcon from "@mui/icons-material/PedalBike";
 import ElectricBikeIcon from "@mui/icons-material/ElectricBike";
@@ -18,8 +26,14 @@ const Station = ({ station }) => {
       <Group position="apart">
         <div>
           <Group>
-            <Text>{station.name}</Text>
-            <Text size="sm">{formatDistance(station.distance)} away</Text>
+            {station ? (
+              <>
+                <Text>{station.name}</Text>
+                <Text size="sm">{formatDistance(station.distance)} away</Text>
+              </>
+            ) : (
+              <Skeleton width="100%" height="1.25rem" />
+            )}
           </Group>
           <Space h="sm" />
           <Group>
@@ -28,29 +42,31 @@ const Station = ({ station }) => {
               leftSection={<PedalBikeIcon />}
               styles={() => ({ leftSection: { alignSelf: "baseline" } })}
             >
-              {station.num_bikes_available_types.mechanical}
+              {station && station.num_bikes_available_types.mechanical}
             </Badge>
             <Badge
               size="lg"
               leftSection={<ElectricBikeIcon />}
               styles={() => ({ leftSection: { alignSelf: "baseline" } })}
             >
-              {station.num_bikes_available_types.ebike}
+              {station && station.num_bikes_available_types.ebike}
             </Badge>
             <Badge
               size="lg"
               leftSection={<DockIcon />}
               styles={() => ({ leftSection: { alignSelf: "baseline" } })}
             >
-              {station.num_docks_available}
+              {station && station.num_docks_available}
             </Badge>
           </Group>
         </div>
-        <div>
-          <ActionIcon size="xl">
-            <DirectionsIcon fontSize="large" />
-          </ActionIcon>
-        </div>
+        {station && (
+          <div>
+            <ActionIcon size="xl">
+              <DirectionsIcon fontSize="large" />
+            </ActionIcon>
+          </div>
+        )}
       </Group>
     </Card>
   );
