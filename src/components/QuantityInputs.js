@@ -1,3 +1,4 @@
+// borrowed from https://github.com/mantinedev/ui.mantine.dev/blob/master/components/QuantityInput/QuantityInput.tsx
 import React, { useRef, useState } from "react";
 import {
   createStyles,
@@ -5,7 +6,6 @@ import {
   NumberInputHandlers,
   ActionIcon,
 } from "@mantine/core";
-// import { Plus, Minus } from "tabler-icons-react";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
@@ -66,7 +66,6 @@ const QuantityInputs = ({ min = 1, max = 10 }) => {
         className={classes.control}
         onMouseDown={(event) => event.preventDefault()}
       >
-        {/* <Minus size={16} /> */}
         <RemoveIcon size={16} />
       </ActionIcon>
 
@@ -88,7 +87,6 @@ const QuantityInputs = ({ min = 1, max = 10 }) => {
         className={classes.control}
         onMouseDown={(event) => event.preventDefault()}
       >
-        {/* <Plus size={16} /> */}
         <AddIcon size={16} />
       </ActionIcon>
     </div>
