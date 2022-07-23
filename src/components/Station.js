@@ -1,22 +1,38 @@
-import { Badge, Card, Group, Paper, Text } from "@mantine/core";
+import { Badge, Card, Group, Text, Space } from "@mantine/core";
 import React from "react";
 import PedalBikeIcon from "@mui/icons-material/PedalBike";
-import styled from "@emotion/styled";
+import ElectricBikeIcon from "@mui/icons-material/ElectricBike";
+import DockIcon from "@mui/icons-material/Dock";
 
 const Station = ({ station }) => {
   return (
     <Card>
-      <Text>{station.name}</Text>
+      <Text>
+        {station.name} - {station.distance}
+      </Text>
+      <Space h="sm" />
       <Group>
         <Badge
           size="lg"
           leftSection={<PedalBikeIcon />}
           styles={() => ({ leftSection: { alignSelf: "baseline" } })}
         >
-          15
+          {station.num_bikes_available_types.mechanical}
         </Badge>
-        <Badge>15</Badge>
-        <Badge>15</Badge>
+        <Badge
+          size="lg"
+          leftSection={<ElectricBikeIcon />}
+          styles={() => ({ leftSection: { alignSelf: "baseline" } })}
+        >
+          {station.num_bikes_available_types.ebike}
+        </Badge>
+        <Badge
+          size="lg"
+          leftSection={<DockIcon />}
+          styles={() => ({ leftSection: { alignSelf: "baseline" } })}
+        >
+          {station.num_docks_available}
+        </Badge>
       </Group>
     </Card>
   );

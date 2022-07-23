@@ -25,7 +25,7 @@ const sampleStation = {
   _ride_code_support: true,
   distance: 0.21841657038860296,
   num_bikes_available: 0,
-  num_bikes_available_types: { mechanical: 0, ebike: 0 },
+  num_bikes_available_types: { mechanical: 5, ebike: 0 },
   num_bikes_disabled: 0,
   num_docks_available: 19,
   num_docks_disabled: 0,
