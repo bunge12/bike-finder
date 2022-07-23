@@ -23,7 +23,7 @@ const sampleStation = {
   obcn: "647-643-9694",
   nearby_distance: 500,
   _ride_code_support: true,
-  distance: 0.21841657038860296,
+  distance: 1.21841657038860296,
   num_bikes_available: 0,
   num_bikes_available_types: { mechanical: 5, ebike: 0 },
   num_bikes_disabled: 0,
