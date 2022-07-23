@@ -4,12 +4,20 @@ import PedalBikeIcon from "@mui/icons-material/PedalBike";
 import ElectricBikeIcon from "@mui/icons-material/ElectricBike";
 import DockIcon from "@mui/icons-material/Dock";
 
+const formatDistance = (distance) => {
+  if (distance < 1) {
+    return `${(distance * 1000).toFixed(0)}m`;
+  }
+  return `${distance.toFixed(1)}km`;
+};
+
 const Station = ({ station }) => {
   return (
     <Card>
-      <Text>
-        {station.name} - {station.distance}
-      </Text>
+      <Group>
+        <Text>{station.name}</Text>
+        <Text size="sm">{formatDistance(station.distance)} away</Text>
+      </Group>
       <Space h="sm" />
       <Group>
         <Badge
