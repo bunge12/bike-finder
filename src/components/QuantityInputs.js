@@ -51,10 +51,15 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const QuantityInputs = ({ min = 1, max = 10 }) => {
+const QuantityInputs = ({ min = 1, max = 10, onValueChange }) => {
   const { classes } = useStyles();
   const handlers = useRef(NumberInputHandlers);
   const [value, setValue] = useState(1);
+
+  const handleChange = (newValue) => {
+    setValue(newValue);
+    onValueChange(newValue);
+  };
 
   return (
     <div className={classes.wrapper}>
@@ -75,7 +80,7 @@ const QuantityInputs = ({ min = 1, max = 10 }) => {
         max={max}
         handlersRef={handlers}
         value={value}
-        onChange={setValue}
+        onChange={(v) => handleChange(v)}
         classNames={{ input: classes.input }}
       />
 
