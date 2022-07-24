@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Stack, Text } from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
@@ -13,14 +13,19 @@ function App() {
     setSearchQuery(query);
     setOpenedSearch(false);
   };
+
+  useEffect(() => {
+    console.log("fetch data");
+  }, []);
+
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
       <Header onSearchClick={() => setOpenedSearch(true)} />
       <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
         Showing 5 closest bike share stations
       </Text>
       <Stack
-        spacing="sm"
+        spacing="xs"
         style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}
       >
         {sampleResponse.map((station, i) => {
