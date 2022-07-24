@@ -23,7 +23,8 @@ function App() {
     setStations([]);
     axios
       .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, searchQuery)
-      .then((res) => setStations(res.data));
+      .then((res) => setStations(res.data))
+      .catch((err) => console.log(err));
   }, [searchQuery]);
 
   return (

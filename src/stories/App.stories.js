@@ -21,3 +21,27 @@ Primary.parameters = {
     ),
   ],
 };
+export const Error = Template.bind({});
+Error.args = {};
+Error.parameters = {
+  msw: [
+    rest.post(
+      `${process.env.REACT_APP_API_ROUTE}/api/stations`,
+      (_req, res, ctx) => {
+        return res(ctx.delay(1500), ctx.status(500));
+      }
+    ),
+  ],
+};
+export const NotFound = Template.bind({});
+NotFound.args = {};
+NotFound.parameters = {
+  msw: [
+    rest.post(
+      `${process.env.REACT_APP_API_ROUTE}/api/stations`,
+      (_req, res, ctx) => {
+        return res(ctx.delay(1500), ctx.status(204));
+      }
+    ),
+  ],
+};
