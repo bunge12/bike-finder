@@ -9,6 +9,10 @@ import Search from "./components/Search";
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setOpenedSearch(false);
+  };
   return (
     <div className="App">
       <Header />
@@ -32,8 +36,12 @@ function App() {
           search for a station
         </Button>
       </Stack>
-      <Modal opened={openedSearch} onClose={() => setOpenedSearch(false)}>
-        <Search onSearch={setSearchQuery} />
+      <Modal
+        centered
+        opened={openedSearch}
+        onClose={() => setOpenedSearch(false)}
+      >
+        <Search onSearch={handleSearch} />
       </Modal>
     </div>
   );

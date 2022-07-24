@@ -39,7 +39,7 @@ const Search = ({ onSearch }) => {
           <Chip value="docks">docks</Chip>
         </Chips>
       </Grid.Col>
-      <Grid.Col span={12} style={{ display: "flex" }}>
+      <Grid.Col span={12} style={{ display: "flex", marginTop: "1rem" }}>
         <Button
           color="bike-share"
           style={{ flex: 1 }}
