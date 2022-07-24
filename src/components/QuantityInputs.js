@@ -1,11 +1,6 @@
 // borrowed from https://github.com/mantinedev/ui.mantine.dev/blob/master/components/QuantityInput/QuantityInput.tsx
 import React, { useRef, useState } from "react";
-import {
-  createStyles,
-  NumberInput,
-  NumberInputHandlers,
-  ActionIcon,
-} from "@mantine/core";
+import { createStyles, NumberInput, ActionIcon } from "@mantine/core";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
@@ -58,7 +53,7 @@ const QuantityInputs = ({
   startingValue,
 }) => {
   const { classes } = useStyles();
-  const handlers = useRef(NumberInputHandlers);
+  const handlers = useRef();
   const [value, setValue] = useState(startingValue);
 
   const handleChange = (newValue) => {

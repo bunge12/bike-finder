@@ -1,4 +1,4 @@
-import { Button, Card, Chip, Chips, Grid, Text } from "@mantine/core";
+import { Button, Chip, Chips, Grid, Text } from "@mantine/core";
 import React, { useState } from "react";
 import QuantityInputs from "./QuantityInputs";
 const DEFAULT_STATIONS = 5;

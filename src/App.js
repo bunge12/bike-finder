@@ -1,37 +1,101 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Stack, Text } from "@mantine/core";
+import {
+  Button,
+  Modal,
+  Skeleton,
+  Stack,
+  Text,
+  Notification,
+} from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
 import Station from "./components/Station";
-import sampleResponse from "./stories/sampleResponse.json";
 import Search from "./components/Search";
+import axios from "axios";
 
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState({
+    stations: 5,
+    quantity: 0,
+    item: "bikes",
+  });
+  const [stations, setStations] = useState([]);
+  const [notification, setNotification] = useState();
   const handleSearch = (query) => {
     setSearchQuery(query);
     setOpenedSearch(false);
   };
 
   useEffect(() => {
-    console.log("fetch data");
-  }, []);
+    setStations([]);
+    setNotification();
+    axios
+      .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, searchQuery)
+      .then((res) => {
+        if (res.status === 200) {
+          setStations(res.data);
+        }
+        if (res.status === 204) {
+          setNotification({
+            text: "Your search returned no results. Please modify your search and try again.",
+          });
+        }
+      })
+      .catch(() => {
+        setNotification({
+          color: "red",
+          text: "There was an error processing your request. Please try again.",
+        });
+      });
+  }, [searchQuery]);
 
   return (
     <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
       <Header onSearchClick={() => setOpenedSearch(true)} />
-      <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
-        Showing 5 closest bike share stations
+      <Text
+        size="sm"
+        align="center"
+        style={{ padding: "0.5rem", marginTop: "1rem" }}
+      >
+        {stations.length > 0 ? (
+          <>Showing {stations.length} closest bike share stations:</>
+        ) : (
+          !notification && (
+            <Skeleton
+              width="75%"
+              height="1.25rem"
+              style={{ margin: "0px auto" }}
+            />
+          )
+        )}
       </Text>
       <Stack
         spacing="xs"
         style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}
       >
-        {sampleResponse.map((station, i) => {
+        {stations.map((station, i) => {
           return <Station key={i} station={station} />;
         })}
-        <Text size="sm">Alternatively, you can</Text>
+        {stations.length === 0 && !notification && (
+          <>
+            <Station key={1} />
+            <Station key={2} />
+            <Station key={3} />
+            <Station key={4} />
+            <Station key={5} />
+          </>
+        )}
+        {notification && (
+          <Notification
+            disallowClose
+            color={notification.color}
+            style={{ textAlign: "left", marginBottom: "2rem" }}
+          >
+            {notification.text}
+          </Notification>
+        )}
+        {!notification && <Text size="sm">Alternatively, you can</Text>}
         <Button
           color="bike-share"
           variant="outline"
