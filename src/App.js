@@ -3,8 +3,8 @@ import { Button, Modal, Skeleton, Stack, Text } from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
 import Station from "./components/Station";
-import sampleResponse from "./stories/sampleResponse.json";
 import Search from "./components/Search";
+import axios from "axios";
 
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
@@ -16,7 +16,9 @@ function App() {
   };
 
   useEffect(() => {
-    console.log("fetch data");
+    axios
+      .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, { searchQuery })
+      .then((res) => setStations(res.data));
   }, []);
 
   return (
