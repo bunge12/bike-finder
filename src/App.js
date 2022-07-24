@@ -36,11 +36,18 @@ function App() {
         if (res.status === 200) {
           setStations(res.data);
         }
-        setNotification({
-          text: "Your search returned no results. Please modify your search and try again.",
-        });
+        if (res.status === 204) {
+          setNotification({
+            text: "Your search returned no results. Please modify your search and try again.",
+          });
+        }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        setNotification({
+          color: "red",
+          text: "There was an error processing your request. Please try again.",
+        });
+      });
   }, [searchQuery]);
 
   return (
@@ -82,6 +89,7 @@ function App() {
         {notification && (
           <Notification
             disallowClose
+            color={notification.color}
             style={{ textAlign: "left", marginBottom: "2rem" }}
           >
             {notification.text}
