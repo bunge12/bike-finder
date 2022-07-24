@@ -4,7 +4,7 @@ import QuantityInputs from "./QuantityInputs";
 const DEFAULT_STATIONS = 5;
 const DEFAULT_QUANTITY = 2;
 
-const Search = () => {
+const Search = ({ onSearch }) => {
   const [stations, setStations] = useState(DEFAULT_STATIONS);
   const [quantity, setQuantity] = useState(DEFAULT_QUANTITY);
   const [item, setItem] = useState("bikes");
@@ -15,7 +15,10 @@ const Search = () => {
           <Text>Search for</Text>
         </Grid.Col>
         <Grid.Col span={4}>
-          <QuantityInputs />
+          <QuantityInputs
+            onValueChange={setStations}
+            startingValue={DEFAULT_STATIONS}
+          />
         </Grid.Col>
         <Grid.Col span={4}>
           <Text>closest stations</Text>
@@ -48,8 +51,12 @@ const Search = () => {
           </Chips>
         </Grid.Col>
         <Grid.Col span={12} style={{ display: "flex" }}>
-          <Button color="bike-share" style={{ flex: 1 }}>
-            Search for 2 stations with {quantity} {item}
+          <Button
+            color="bike-share"
+            style={{ flex: 1 }}
+            onClick={() => onSearch({ stations, quantity, item })}
+          >
+            Search for {stations} stations with {quantity} {item}
           </Button>
         </Grid.Col>
       </Grid>
