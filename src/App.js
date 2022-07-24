@@ -8,7 +8,11 @@ import axios from "axios";
 
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState({
+    stations: 5,
+    quantity: 0,
+    item: "bikes",
+  });
   const [stations, setStations] = useState([]);
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -16,10 +20,11 @@ function App() {
   };
 
   useEffect(() => {
+    setStations([]);
     axios
-      .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, { searchQuery })
+      .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, searchQuery)
       .then((res) => setStations(res.data));
-  }, []);
+  }, [searchQuery]);
 
   return (
     <div className="App" style={{ backgroundColor: "#F8F8F8" }}>

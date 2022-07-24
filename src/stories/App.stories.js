@@ -16,7 +16,7 @@ Primary.parameters = {
     rest.post(
       `${process.env.REACT_APP_API_ROUTE}/api/stations`,
       (_req, res, ctx) => {
-        return res(ctx.delay(3000), ctx.json(sampleResponse));
+        return res(ctx.delay(1500), ctx.json(sampleResponse));
       }
     ),
   ],
