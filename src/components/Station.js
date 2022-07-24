@@ -21,11 +21,10 @@ const formatDistance = (distance) => {
 };
 
 const Station = ({ station }) => {
-  const data = Object.keys(station).length > 0;
   return (
     <Card withBorder>
       <Group>
-        {data ? (
+        {station ? (
           <>
             <Text>{station.name}</Text>
             <Text size="sm">{formatDistance(station.distance)} away</Text>
@@ -41,23 +40,23 @@ const Station = ({ station }) => {
           leftSection={<PedalBikeIcon />}
           styles={() => ({ leftSection: { alignSelf: "baseline" } })}
         >
-          {data && station.num_bikes_available_types.mechanical}
+          {station && station.num_bikes_available_types.mechanical}
         </Badge>
         <Badge
           size="lg"
           leftSection={<ElectricBikeIcon />}
           styles={() => ({ leftSection: { alignSelf: "baseline" } })}
         >
-          {data && station.num_bikes_available_types.ebike}
+          {station && station.num_bikes_available_types.ebike}
         </Badge>
         <Badge
           size="lg"
           leftSection={<DockIcon />}
           styles={() => ({ leftSection: { alignSelf: "baseline" } })}
         >
-          {data && station.num_docks_available}
+          {station && station.num_docks_available}
         </Badge>
-        {data && (
+        {station && (
           <ActionIcon
             size="xl"
             style={{ marginLeft: "auto" }}

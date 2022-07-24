@@ -9,7 +9,7 @@ import Search from "./components/Search";
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
-  const [stations, setStations] = useState([{}]);
+  const [stations, setStations] = useState([]);
   const handleSearch = (query) => {
     setSearchQuery(query);
     setOpenedSearch(false);
@@ -23,7 +23,7 @@ function App() {
     <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
       <Header onSearchClick={() => setOpenedSearch(true)} />
       <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
-        Showing 5 closest bike share stations
+        Showing {stations.length} closest bike share stations
       </Text>
       <Stack
         spacing="xs"
@@ -32,6 +32,15 @@ function App() {
         {stations.map((station, i) => {
           return <Station key={i} station={station} />;
         })}
+        {stations.length === 0 && (
+          <>
+            <Station key={1} />
+            <Station key={2} />
+            <Station key={3} />
+            <Station key={4} />
+            <Station key={5} />
+          </>
+        )}
         <Text size="sm">Alternatively, you can</Text>
         <Button
           color="bike-share"
