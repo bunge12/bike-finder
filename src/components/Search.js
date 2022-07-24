@@ -1,10 +1,12 @@
 import { Button, Card, Chip, Chips, Grid, Text } from "@mantine/core";
 import React, { useState } from "react";
 import QuantityInputs from "./QuantityInputs";
+const DEFAULT_STATIONS = 5;
+const DEFAULT_QUANTITY = 2;
 
 const Search = () => {
-  const [stations, setStations] = useState(5);
-  const [quantity, setQuantity] = useState(2);
+  const [stations, setStations] = useState(DEFAULT_STATIONS);
+  const [quantity, setQuantity] = useState(DEFAULT_QUANTITY);
   const [item, setItem] = useState("bikes");
   return (
     <Card>
@@ -22,7 +24,10 @@ const Search = () => {
           <Text>with at least</Text>
         </Grid.Col>
         <Grid.Col span={4}>
-          <QuantityInputs />
+          <QuantityInputs
+            onValueChange={setQuantity}
+            startingValue={DEFAULT_QUANTITY}
+          />
         </Grid.Col>
         <Grid.Col span={2}>
           <Text>available</Text>
@@ -44,7 +49,7 @@ const Search = () => {
         </Grid.Col>
         <Grid.Col span={12} style={{ display: "flex" }}>
           <Button color="bike-share" style={{ flex: 1 }}>
-            Search for 2 stations with 4 {item}
+            Search for 2 stations with {quantity} {item}
           </Button>
         </Grid.Col>
       </Grid>

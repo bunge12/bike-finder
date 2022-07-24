@@ -51,10 +51,15 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const QuantityInputs = ({ min = 1, max = 10, onValueChange }) => {
+const QuantityInputs = ({
+  min = 1,
+  max = 10,
+  onValueChange,
+  startingValue,
+}) => {
   const { classes } = useStyles();
   const handlers = useRef(NumberInputHandlers);
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(startingValue);
 
   const handleChange = (newValue) => {
     setValue(newValue);
