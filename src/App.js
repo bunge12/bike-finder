@@ -144,7 +144,7 @@ function App() {
         opened={openedSearch}
         onClose={() => setOpenedSearch(false)}
       >
-        <Search onSearch={handleSearch} />
+        <Search onSearch={handleSearch} searchQuery={searchQuery} />
       </Modal>
     </div>
   );

@@ -1,33 +1,25 @@
 import { Button, Chip, Chips, Grid, Text } from "@mantine/core";
 import React, { useState } from "react";
 import QuantityInputs from "./QuantityInputs";
-const DEFAULT_STATIONS = 5;
-const DEFAULT_QUANTITY = 2;
 
-const Search = ({ onSearch }) => {
-  const [stations, setStations] = useState(DEFAULT_STATIONS);
-  const [quantity, setQuantity] = useState(DEFAULT_QUANTITY);
-  const [item, setItem] = useState("bikes");
+const Search = ({ onSearch, searchQuery }) => {
+  const [stations, setStations] = useState(searchQuery?.stations);
+  const [quantity, setQuantity] = useState(searchQuery?.quantity);
+  const [item, setItem] = useState(searchQuery?.item);
   return (
     <Grid align="center" gutter="lg" justify="center">
       <Grid.Col span={4}>
         <Text>Search for</Text>
       </Grid.Col>
       <Grid.Col span={5}>
-        <QuantityInputs
-          onValueChange={setStations}
-          startingValue={DEFAULT_STATIONS}
-        />
+        <QuantityInputs onValueChange={setStations} startingValue={stations} />
       </Grid.Col>
       <Grid.Col span={12}>
         <Text align="center">closest stations with at least</Text>
       </Grid.Col>
 
       <Grid.Col span={5}>
-        <QuantityInputs
-          onValueChange={setQuantity}
-          startingValue={DEFAULT_QUANTITY}
-        />
+        <QuantityInputs onValueChange={setQuantity} startingValue={quantity} />
       </Grid.Col>
       <Grid.Col span={4}>
         <Text>available</Text>
