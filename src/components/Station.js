@@ -34,7 +34,7 @@ const Station = ({ station }) => {
         )}
       </Group>
       <Space h="sm" />
-      <Group spacing="xs">
+      <Group spacing={5}>
         <Badge
           size="lg"
           leftSection={<PedalBikeIcon />}
