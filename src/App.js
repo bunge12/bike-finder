@@ -9,6 +9,7 @@ import Search from "./components/Search";
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState();
+  const [stations, setStations] = useState([{}]);
   const handleSearch = (query) => {
     setSearchQuery(query);
     setOpenedSearch(false);
@@ -28,7 +29,7 @@ function App() {
         spacing="xs"
         style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}
       >
-        {sampleResponse.map((station, i) => {
+        {stations.map((station, i) => {
           return <Station key={i} station={station} />;
         })}
         <Text size="sm">Alternatively, you can</Text>
