@@ -30,7 +30,7 @@ const Station = ({ station }) => {
             <Text size="sm">{formatDistance(station.distance)} away</Text>
           </>
         ) : (
-          <Skeleton width="100%" height="1.25rem" />
+          <Skeleton width="100%" height="2rem" />
         )}
       </Group>
       <Space h="sm" />
