@@ -8,10 +8,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Text>Showing you 5 closes bike share stations:</Text>
+      <Text>Showing 5 closest bike share stations:</Text>
       <Stack>
-        {sampleResponse.map((station) => {
-          return <Station station={station} />;
+        {sampleResponse.map((station, i) => {
+          return <Station key={i} station={station} />;
         })}
       </Stack>
     </div>
