@@ -34,7 +34,7 @@ const Station = ({ station }) => {
         )}
       </Group>
       <Space h="sm" />
-      <Group spacing="xs">
+      <Group spacing={5}>
         <Badge
           size="lg"
           leftSection={<PedalBikeIcon />}
@@ -57,7 +57,13 @@ const Station = ({ station }) => {
           {station && station.num_docks_available}
         </Badge>
         {station && (
-          <ActionIcon size="xl" style={{ marginLeft: "auto" }}>
+          <ActionIcon
+            size="xl"
+            style={{ marginLeft: "auto" }}
+            component="a"
+            target="_blank"
+            href={`https://www.google.ca/maps/dir//${station.lat},${station.lon}/`}
+          >
             <DirectionsIcon fontSize="large" />
           </ActionIcon>
         )}
