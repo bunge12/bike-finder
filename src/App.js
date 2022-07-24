@@ -14,13 +14,13 @@ function App() {
     setOpenedSearch(false);
   };
   return (
-    <div className="App">
+    <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
       <Header onSearchClick={() => setOpenedSearch(true)} />
       <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
         Showing 5 closest bike share stations
       </Text>
       <Stack
-        spacing="sm"
+        spacing="xs"
         style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}
       >
         {sampleResponse.map((station, i) => {
