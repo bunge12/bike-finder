@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Modal, Stack, Text } from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
@@ -13,6 +13,11 @@ function App() {
     setSearchQuery(query);
     setOpenedSearch(false);
   };
+
+  useEffect(() => {
+    console.log("fetch data");
+  }, []);
+
   return (
     <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
       <Header onSearchClick={() => setOpenedSearch(true)} />
