@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Stack, Text } from "@mantine/core";
+import { Button, Modal, Skeleton, Stack, Text } from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
 import Station from "./components/Station";
@@ -22,8 +22,20 @@ function App() {
   return (
     <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
       <Header onSearchClick={() => setOpenedSearch(true)} />
-      <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
-        Showing {stations.length} closest bike share stations
+      <Text
+        size="sm"
+        align="center"
+        style={{ padding: "0.5rem", marginTop: "1rem" }}
+      >
+        {stations.length > 0 ? (
+          <>Showing {stations.length} closest bike share stations:</>
+        ) : (
+          <Skeleton
+            width="75%"
+            height="1.25rem"
+            style={{ margin: "0px auto" }}
+          />
+        )}
       </Text>
       <Stack
         spacing="xs"
