@@ -11,6 +11,6 @@ export const parameters = {
   },
   layout: "fullscreen",
   backgrounds: {
-    default: "dark",
+    default: "light",
   },
 };
