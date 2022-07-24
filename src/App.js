@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Modal, Skeleton, Stack, Text } from "@mantine/core";
+import {
+  Button,
+  Modal,
+  Skeleton,
+  Stack,
+  Text,
+  Notification,
+} from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
 import Station from "./components/Station";
@@ -14,6 +21,7 @@ function App() {
     item: "bikes",
   });
   const [stations, setStations] = useState([]);
+  const [notification, setNotification] = useState();
   const handleSearch = (query) => {
     setSearchQuery(query);
     setOpenedSearch(false);
@@ -21,9 +29,17 @@ function App() {
 
   useEffect(() => {
     setStations([]);
+    setNotification();
     axios
       .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, searchQuery)
-      .then((res) => setStations(res.data))
+      .then((res) => {
+        if (res.status === 200) {
+          setStations(res.data);
+        }
+        setNotification({
+          text: "Your search returned no results. Please modify your search and try again.",
+        });
+      })
       .catch((err) => console.log(err));
   }, [searchQuery]);
 
@@ -38,11 +54,13 @@ function App() {
         {stations.length > 0 ? (
           <>Showing {stations.length} closest bike share stations:</>
         ) : (
-          <Skeleton
-            width="75%"
-            height="1.25rem"
-            style={{ margin: "0px auto" }}
-          />
+          !notification && (
+            <Skeleton
+              width="75%"
+              height="1.25rem"
+              style={{ margin: "0px auto" }}
+            />
+          )
         )}
       </Text>
       <Stack
@@ -52,7 +70,7 @@ function App() {
         {stations.map((station, i) => {
           return <Station key={i} station={station} />;
         })}
-        {stations.length === 0 && (
+        {stations.length === 0 && !notification && (
           <>
             <Station key={1} />
             <Station key={2} />
@@ -61,7 +79,15 @@ function App() {
             <Station key={5} />
           </>
         )}
-        <Text size="sm">Alternatively, you can</Text>
+        {notification && (
+          <Notification
+            disallowClose
+            style={{ textAlign: "left", marginBottom: "2rem" }}
+          >
+            {notification.text}
+          </Notification>
+        )}
+        {!notification && <Text size="sm">Alternatively, you can</Text>}
         <Button
           color="bike-share"
           variant="outline"
