@@ -11,7 +11,10 @@ function App() {
       <Text size="small" style={{ padding: "0.5rem" }}>
         Showing 5 closest bike share stations:
       </Text>
-      <Stack style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}>
+      <Stack
+        spacing="sm"
+        style={{ paddingLeft: "0.5rem", paddingRight: "0.5rem" }}
+      >
         {sampleResponse.map((station, i) => {
           return <Station key={i} station={station} />;
         })}
