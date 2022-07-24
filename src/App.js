@@ -15,6 +15,8 @@ import axios from "axios";
 
 function App() {
   const [openedSearch, setOpenedSearch] = useState(false);
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
   const [searchQuery, setSearchQuery] = useState({
     stations: 5,
     quantity: 0,
@@ -30,25 +32,57 @@ function App() {
   useEffect(() => {
     setStations([]);
     setNotification();
-    axios
-      .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, searchQuery)
-      .then((res) => {
-        if (res.status === 200) {
-          setStations(res.data);
-        }
-        if (res.status === 204) {
+    lat &&
+      lng &&
+      axios
+        .post(`${process.env.REACT_APP_API_ROUTE}/api/stations`, {
+          ...searchQuery,
+          lat,
+          lng,
+        })
+        .then((res) => {
+          if (res.status === 200) {
+            setStations(res.data);
+          }
+          if (res.status === 204) {
+            setNotification({
+              text: "Your search returned no results. Please modify your search and try again.",
+            });
+          }
+        })
+        .catch(() => {
           setNotification({
-            text: "Your search returned no results. Please modify your search and try again.",
+            color: "red",
+            text: "There was an error processing your request. Please try again.",
+          });
+        });
+  }, [searchQuery, lat, lng]);
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setNotification({
+        color: "red",
+        text: "Geolocation is not supported by your browser",
+      });
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+        },
+        () => {
+          setNotification({
+            color: "red",
+            text: "Unable to retrieve your location",
           });
         }
-      })
-      .catch(() => {
-        setNotification({
-          color: "red",
-          text: "There was an error processing your request. Please try again.",
-        });
-      });
-  }, [searchQuery]);
+      );
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   return (
     <div className="App" style={{ backgroundColor: "#F8F8F8" }}>
