@@ -1,5 +1,5 @@
 import React from "react";
-import { Group, Title } from "@mantine/core";
+import { ActionIcon, Group, Title } from "@mantine/core";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "@emotion/styled";
 
@@ -9,12 +9,18 @@ const StyledHeader = styled.header`
   background-color: #006747;
 `;
 
-const Header = () => {
+const Header = ({ onSearchClick }) => {
   return (
     <StyledHeader>
       <Group position="apart">
         <Title order={3}>Bike Finder</Title>
-        <SearchIcon />
+        <ActionIcon
+          onClick={onSearchClick}
+          variant="transparent"
+          style={{ color: "white" }}
+        >
+          <SearchIcon />
+        </ActionIcon>
       </Group>
     </StyledHeader>
   );

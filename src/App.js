@@ -15,7 +15,7 @@ function App() {
   };
   return (
     <div className="App">
-      <Header />
+      <Header onSearchClick={() => setOpenedSearch(true)} />
       <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
         Showing 5 closest bike share stations
       </Text>
