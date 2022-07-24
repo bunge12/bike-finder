@@ -1,16 +1,11 @@
-import {
-  Button,
-  Card,
-  Chip,
-  Chips,
-  Grid,
-  NumberInput,
-  Text,
-} from "@mantine/core";
-import React from "react";
+import { Button, Card, Chip, Chips, Grid, Text } from "@mantine/core";
+import React, { useState } from "react";
 import QuantityInputs from "./QuantityInputs";
 
 const Search = () => {
+  const [stations, setStations] = useState(5);
+  const [quantity, setQuantity] = useState(2);
+  const [item, setItem] = useState("bikes");
   return (
     <Card>
       <Grid align="center" gutter="lg">
@@ -21,10 +16,10 @@ const Search = () => {
           <QuantityInputs />
         </Grid.Col>
         <Grid.Col span={4}>
-          <Text>closest</Text>
+          <Text>closest stations</Text>
         </Grid.Col>
-        <Grid.Col span={5}>
-          <Text>stations with at least</Text>
+        <Grid.Col span={4}>
+          <Text>with at least</Text>
         </Grid.Col>
         <Grid.Col span={4}>
           <QuantityInputs />
@@ -36,14 +31,21 @@ const Search = () => {
           span={12}
           style={{ display: "flex", justifyContent: "center" }}
         >
-          <Chips align="center">
-            <Chip value="react">bikes</Chip>
-            <Chip value="ng">e-bikes</Chip>
-            <Chip value="svelte">docks</Chip>
+          <Chips
+            align="center"
+            multiple={false}
+            value={item}
+            onChange={setItem}
+          >
+            <Chip value="bikes">bikes</Chip>
+            <Chip value="e-bikes">e-bikes</Chip>
+            <Chip value="docks">docks</Chip>
           </Chips>
         </Grid.Col>
         <Grid.Col span={12} style={{ display: "flex" }}>
-          <Button style={{ flex: 1 }}>Search</Button>
+          <Button color="bike-share" style={{ flex: 1 }}>
+            Search for 2 stations with 4 {item}
+          </Button>
         </Grid.Col>
       </Grid>
     </Card>
