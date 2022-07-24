@@ -1,4 +1,4 @@
-import { Stack, Text } from "@mantine/core";
+import { Button, Stack, Text } from "@mantine/core";
 import "./App.css";
 import Header from "./components/Header";
 import Station from "./components/Station";
@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Text size="small" style={{ padding: "0.5rem" }}>
-        Showing 5 closest bike share stations:
+      <Text size="sm" style={{ padding: "0.5rem", marginTop: "1rem" }}>
+        Showing 5 closest bike share stations
       </Text>
       <Stack
         spacing="sm"
@@ -18,6 +18,10 @@ function App() {
         {sampleResponse.map((station, i) => {
           return <Station key={i} station={station} />;
         })}
+        <Text size="sm">Alternatively, you can</Text>
+        <Button color="bike-share" variant="outline" uppercase>
+          search for a station
+        </Button>
       </Stack>
     </div>
   );
