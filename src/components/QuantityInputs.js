@@ -9,7 +9,6 @@ const useStyles = createStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    padding: `6px ${theme.spacing.xs}px`,
     borderRadius: theme.radius.sm,
     border: `1px solid ${
       theme.colorScheme === "dark" ? "transparent" : theme.colors.gray[3]
